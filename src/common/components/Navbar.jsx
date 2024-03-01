@@ -17,7 +17,7 @@ export const Navbar = () => {
   return (
     <nav className="w-full fixed top-0 bg-[#eab3080f] shadow-md">
     <div className="flex justify-between mx-auto py-3 max-w-5xl px-3">
-        <img src="src/assets/logo.jpeg" className=" h-16 w-16 object-cover rounded-[50%]"></img>
+        <img src="/logo.jpeg" className=" h-16 w-16 object-cover rounded-[50%]"></img>
         {auth.isLoggedIn && (
           <div className="flex gap-5 items-center">
             <div className="relative">
