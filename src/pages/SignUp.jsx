@@ -1,8 +1,9 @@
 import { Formik } from "formik";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { signUpThunk } from "../redux/auth/authThunks";
+import { Loader } from "../common/components/Loader";
 
 const SignUp = () => {
   const loginSchema = Yup.object().shape({
@@ -13,12 +14,14 @@ const SignUp = () => {
   });
 
   const dispatch = useDispatch();
+  const signupStatus = useSelector((store) => store.apiStatus.signUp);
 
   const handleSubmit = (values) => {
     dispatch(signUpThunk(values))
   };
   return (
     <div className="mt-32 mx-auto max-w-md bg-gradient-to-b from-white to-blue-50 rounded-3xl p-10 border-5 border-white shadow-lg">
+       <Loader showBackdropLoader={signupStatus?.isLoading === true} />
       <div className="heading text-center font-bold text-2xl text-blue-500">
         Sign Up
       </div>
@@ -99,7 +102,7 @@ const SignUp = () => {
               <span className="text-red-500 p-2">{errors.password}</span>
             )}
             <input
-              className="login-button block w-full font-bold bg-gradient-to-r from-blue-500 to-blue-600 text-white px-5 py-4 mt-8 mx-auto rounded-2xl shadow-md border-none transition-all duration-200 ease-in-out hover:transform hover:scale-103 active:scale-95 focus:outline-none"
+              className="cursor-pointer login-button block w-full font-bold bg-gradient-to-r from-blue-500 to-blue-600 text-white px-5 py-4 mt-8 mx-auto rounded-2xl shadow-md border-none transition-all duration-200 ease-in-out hover:transform hover:scale-103 active:scale-95 focus:outline-none"
               type="submit"
               value="Sign Up"
             />

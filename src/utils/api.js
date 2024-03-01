@@ -17,7 +17,7 @@ const apiInstance = axios.create();
 
 const createApiConfig = ({ method, apiEndpoint, payload, headers = {} }) => ({
   method,
-  url: "http://127.0.0.1:8080" + apiEndpoint,
+  url: "https://narrativenexbe.onrender.com" + apiEndpoint,
   data: payload,
   headers: {
     accept: "application/json",
@@ -63,7 +63,7 @@ apiInstance.interceptors.response.use(
       if (refreshToken) {
         try {
           const refreshResponse = await axios.post(
-            "http://127.0.0.1:8080" + "/auth/refresh",
+            "https://narrativenexbe.onrender.com" + "/auth/refresh",
             {
               refreshToken,
               userId: store.getState().auth.userId,
@@ -104,7 +104,7 @@ export async function callAPI({
         request: payload,
         response: response.data,
         method,
-        url: "http://127.0.0.1:8080" + apiEndpoint,
+        url: "https://narrativenexbe.onrender.com" + apiEndpoint,
       });
     }
     //If the backend is sending some success messages in the response, then set that message instead of the message 'Success'.
@@ -136,12 +136,12 @@ export async function callAPI({
         ...err,
         method,
         request: payload,
-        url: "http://127.0.0.1:8080" + apiEndpoint,
+        url: "https://narrativenexbe.onrender.com" + apiEndpoint,
       });
     }
     toast.error(err.message, {
       position: "bottom-right",
-    })
+    });
 
     return dispatch(
       loadingFailed({

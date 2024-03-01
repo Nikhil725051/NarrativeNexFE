@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { logInThunk } from "../redux/auth/authThunks";
 import { selectAuth } from "../redux/auth/authSelector";
 import { toast } from "react-toastify";
+import { Loader } from "../common/components/Loader";
 
 const Login = () => {
   const loginSchema = Yup.object().shape({
@@ -15,13 +16,13 @@ const Login = () => {
   const dispatch = useDispatch();
   const auth = useSelector(selectAuth);
   const authStatus = useSelector((store) => store.apiStatus.logIn);
-  console.log(authStatus)
 
   const handleSubmit = (values) => {
     dispatch(logInThunk(values));
   };
   return (
     <div className="mt-32 mx-auto max-w-md bg-gradient-to-b from-white to-blue-50 rounded-3xl p-10 border-5 border-white shadow-lg">
+       <Loader showBackdropLoader={authStatus?.isLoading === true} />
       <div className="heading text-center font-bold text-2xl text-blue-500">
         Sign In
       </div>
